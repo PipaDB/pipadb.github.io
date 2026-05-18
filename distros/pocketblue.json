@@ -1,0 +1,7 @@
+{
+  "id": "pocketblue",
+  "name": "PocketBlue",
+  "family": "atomic",
+  "summary": "Atomic (immutable) Fedora image",
+  "url": "https://github.com/pocketblue/pocketblue"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "your-distro-id",
+  "name": "Your Distro",
+  "family": "arch",
+  "summary": "Short description of the port",
+  "url": "https://github.com/you/your-repo"
+}

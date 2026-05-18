@@ -1,0 +1,30 @@
+[
+  {
+    "id": "armtix",
+    "name": "armtix",
+    "summary": "Artix Linux port by Neo10e",
+    "url": "https://github.com/Neo10e/armtix-xiaomi-pipa",
+    "family": "arch"
+  },
+  {
+    "id": "pipa-fedora",
+    "name": "pipa-fedora",
+    "summary": "Non-atomic Fedora 43 builder by rr1111",
+    "url": "https://github.com/rr1111/pipa-fedora-builder-43",
+    "family": "fedora"
+  },
+  {
+    "id": "pocketblue",
+    "name": "PocketBlue",
+    "summary": "Atomic (immutable) Fedora image",
+    "url": "https://github.com/pocketblue/pocketblue",
+    "family": "atomic"
+  },
+  {
+    "id": "postmarketos",
+    "name": "postmarketOS",
+    "summary": "Porting wiki for the Xiaomi Pad 6",
+    "url": "https://wiki.postmarketos.org/wiki/Xiaomi_Pad_6_(xiaomi-pipa)",
+    "family": "alpine"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "id": "your-title-id",
+  "name": "Your Title",
+  "status": "platinum",
+  "tb": "@your-handle",
+  "compatibility": "Works out of the box",
+  "notes": "If prompted to force quit, press wait.",
+  "platform": "xiaomi-pipa",
+  "store": "steam",
+  "tags": ["out-of-box"]
+}

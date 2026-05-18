@@ -1,0 +1,23 @@
+{
+  "name": "pipadb",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:data && vite",
+    "build:data": "node scripts/build-index.mjs",
+    "validate:data": "node scripts/build-index.mjs --validate-only",
+    "build": "npm run build:data && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.17",
+    "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "fuse.js": "^7.3.0",
+    "gsap": "^3.15.0"
+  }
+}

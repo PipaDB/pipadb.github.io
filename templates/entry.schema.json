@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pipadb.local/schema/entry.schema.json",
+  "title": "pipaDB entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "status", "tb"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Kebab-case unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": ["game", "app"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["platinum", "gold", "silver", "bronze", "middle", "config", "tweaking", "borked"]
+    },
+    "tb": {
+      "type": "string",
+      "description": "Tester handle, example @username"
+    },
+    "compatibility": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "proton": {
+      "type": "string",
+      "description": "Optional. Mainly for games."
+    },
+    "platform": {
+      "type": "string"
+    },
+    "store": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "prism-launcher",
+    "name": "Prism Launcher",
+    "type": "app",
+    "status": "platinum",
+    "tb": "@hiiragikagami",
+    "compatibility": "Works out of the box",
+    "notes": "Non-Steam app reported working on Xiaomi Pipa.",
+    "proton": "",
+    "platform": "xiaomi-pipa",
+    "store": "non-steam",
+    "tags": [
+      "launcher",
+      "non-steam"
+    ]
+  },
+  {
+    "id": "obs-studio",
+    "name": "OBS Studio",
+    "type": "app",
+    "status": "borked",
+    "tb": "@hiiragikagami",
+    "compatibility": "Fails / Borked",
+    "notes": "Reported as failure.",
+    "proton": "",
+    "platform": "xiaomi-pipa",
+    "store": "non-steam",
+    "tags": [
+      "capture",
+      "failure"
+    ]
+  }
+]

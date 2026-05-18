@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    @apply overflow-x-hidden;
+  }
+
+  body {
+    @apply m-0 min-h-screen overflow-x-hidden bg-paper text-ink antialiased;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  ::selection {
+    @apply bg-brand text-white;
+  }
+}
+
+@layer components {
+  /* Brutalist surface — flat fill, hard border, offset shadow. */
+  .box {
+    @apply border-2 border-line bg-panel;
+  }
+  .box-shadow {
+    @apply box shadow-hard;
+  }
+
+  .field {
+    @apply border-2 border-line bg-paper px-3.5 py-2.5 font-mono text-sm text-ink
+      outline-none transition placeholder:text-muted
+      focus:-translate-x-0.5 focus:-translate-y-0.5 focus:border-brand focus:shadow-hard-sm;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-line
+      px-4 py-2 text-sm font-bold uppercase tracking-wide transition
+      hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-sm
+      active:translate-x-0 active:translate-y-0 active:shadow-none;
+  }
+  .btn-primary {
+    @apply btn border-brand bg-brand text-white;
+  }
+  .btn-ghost {
+    @apply btn bg-panel text-ink hover:border-brand;
+  }
+
+  /* Tier tags — solid flat color, no gradient. */
+  .tier {
+    @apply inline-flex items-center gap-1.5 border-2 border-line px-2 py-0.5
+      font-mono text-[11px] font-bold uppercase tracking-tight text-black;
+  }
+  .tier-platinum { @apply bg-tier-platinum; }
+  .tier-gold     { @apply bg-tier-gold; }
+  .tier-silver   { @apply bg-tier-silver; }
+  .tier-bronze   { @apply bg-tier-bronze; }
+  .tier-middle   { @apply bg-tier-middle; }
+  .tier-config   { @apply bg-tier-config; }
+  .tier-tweaking { @apply bg-tier-tweaking; }
+  .tier-borked   { @apply bg-tier-borked text-white; }
+
+  /* Card top stripe colored by tier. */
+  .stripe-platinum { @apply bg-tier-platinum; }
+  .stripe-gold     { @apply bg-tier-gold; }
+  .stripe-silver   { @apply bg-tier-silver; }
+  .stripe-bronze   { @apply bg-tier-bronze; }
+  .stripe-middle   { @apply bg-tier-middle; }
+  .stripe-config   { @apply bg-tier-config; }
+  .stripe-tweaking { @apply bg-tier-tweaking; }
+  .stripe-borked   { @apply bg-tier-borked; }
+
+  .entry-card {
+    @apply flex min-w-0 flex-col border-2 border-line bg-panel shadow-hard transition
+      duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:border-brand
+      hover:bg-panel2 hover:shadow-hard-lg;
+  }
+
+  .chip {
+    @apply border-2 border-line bg-paper px-1.5 py-0.5 font-mono text-[11px]
+      font-bold lowercase text-ink;
+  }
+
+  .label {
+    @apply font-mono text-[11px] font-bold uppercase tracking-widest text-muted;
+  }
+}
