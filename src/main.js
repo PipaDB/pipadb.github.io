@@ -54,14 +54,38 @@ app.innerHTML = `
   <div class="min-h-screen">
     <nav class="sticky top-0 z-30 border-b-2 border-line bg-paper">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#top" class="flex items-center gap-2.5">
+        <button id="site-logo" type="button" class="flex items-center gap-2.5 bg-transparent p-0 text-left">
           <img src="./tux.png" alt="" class="h-8 w-auto" />
           <span class="font-display text-lg">pipaDB</span>
-        </a>
-        <div class="flex shrink-0 items-center gap-2">
-          <a href="./api/index.json" class="btn-ghost hidden sm:inline-flex">API</a>
-          <a href="${TELEGRAM_URL}" target="_blank" rel="noopener noreferrer" class="btn-ghost hidden sm:inline-flex">Telegram</a>
-          <a href="https://github.com/PipaDB/pipadb.github.io" target="_blank" rel="noopener noreferrer" class="btn-primary">Submit report</a>
+        </button>
+        <div class="relative shrink-0">
+          <button id="nav-menu-toggle" type="button" class="btn-ghost h-9 w-9 p-0"
+                  aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div id="nav-menu" class="absolute right-0 top-full z-40 mt-2 w-60 box-shadow hidden">
+            <div class="flex flex-col gap-3 px-4 py-3">
+              <div class="space-y-2">
+                <p class="label">Theme</p>
+                <label class="sr-only" for="theme-select">Theme</label>
+                <select id="theme-select" class="field w-full text-xs">
+                  <option value="dark">Dark</option>
+                  <option value="light">Light</option>
+                  <option value="cappuccino">Cappuccino</option>
+                  <option value="strawberry">Strawberry</option>
+                  <option value="mint">Mint</option>
+                  <option value="ocean">Ocean</option>
+                  <option value="tokyo-night">Tokyo Night</option>
+                </select>
+              </div>
+              <div class="h-px bg-line/30"></div>
+              <a href="./api/index.json" class="btn-ghost w-full justify-start">API</a>
+              <a href="${TELEGRAM_URL}" target="_blank" rel="noopener noreferrer" class="btn-ghost w-full justify-start">Telegram</a>
+              <a href="https://github.com/PipaDB/pipadb.github.io" target="_blank" rel="noopener noreferrer" class="btn-primary w-full justify-start">Submit report</a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -71,9 +95,16 @@ app.innerHTML = `
         <div class="grid items-center gap-6 md:gap-8 md:grid-cols-[1.2fr_0.8fr]">
           <div class="hero-copy min-w-0">
             <span class="tier tier-platinum mb-5 inline-flex max-w-full whitespace-normal">Xiaomi Pad 6 · codename "pipa"</span>
-            <h1 class="font-display text-[3.25rem] leading-[0.9] tracking-tight [word-break:break-word] sm:text-7xl md:text-[8.5rem]">
-              Pipa<span class="text-brand">DB</span>
+            <h1 class="hero-title font-display text-[3.25rem] leading-[0.9] tracking-tight [word-break:break-word] sm:text-7xl md:text-[8.5rem]">
+              Pipa<span class="text-brand hero-db">DB
+                <img src="./cinnamon.png" alt="" aria-hidden="true" class="cinnamon-roll" width="92" height="48" />
+              </span>
             </h1>
+            <div class="mt-3 flex flex-wrap items-center gap-2 font-mono text-xs text-ink/60">
+              <span id="local-clock"></span>
+              <span class="hidden sm:inline text-ink/30">•</span>
+              <span id="time-message" class="text-ink/50"></span>
+            </div>
             <p class="mt-5 max-w-xl font-mono text-sm leading-relaxed text-ink/70 md:text-base">
               A community-driven compatibility database for games, apps, distros
               &amp; recoveries on the Xiaomi Pad 6.
@@ -155,6 +186,9 @@ app.innerHTML = `
         <p id="meta-guidance" class="font-mono text-xs text-ink/45"></p>
       </div>
     </footer>
+    <div id="mascot-egg" class="mascot-egg" aria-hidden="true">
+      <img src="./tux.png" alt="" class="mascot-egg__sprite" />
+    </div>
   </div>
 `
 
@@ -164,10 +198,122 @@ const statusFilter = document.querySelector('#status-filter')
 const resultsSummary = document.querySelector('#results-summary')
 const resultsContainer = document.querySelector('#results')
 const guidanceText = document.querySelector('#meta-guidance')
+const clockText = document.querySelector('#local-clock')
+const timeMessage = document.querySelector('#time-message')
 const statRow = document.querySelector('#stat-row')
 const tierLegend = document.querySelector('#tier-legend')
 const resourcesEl = document.querySelector('#resources')
 const loadMoreBtn = document.querySelector('#load-more')
+const logoLink = document.querySelector('#site-logo')
+const mascotEgg = document.querySelector('#mascot-egg')
+const themeSelect = document.querySelector('#theme-select')
+const menuToggle = document.querySelector('#nav-menu-toggle')
+const menuPanel = document.querySelector('#nav-menu')
+
+const revealMascot = () => {
+  if (!mascotEgg) return
+  mascotEgg.classList.add('is-visible')
+}
+
+if (logoLink && mascotEgg) {
+  const EGG_CLICKS = 7
+  let logoClicks = 0
+  let resetTimer = null
+
+  logoLink.addEventListener('click', () => {
+    logoClicks += 1
+    if (logoClicks >= EGG_CLICKS) {
+      revealMascot()
+      logoClicks = 0
+      if (resetTimer) clearTimeout(resetTimer)
+      return
+    }
+    if (resetTimer) clearTimeout(resetTimer)
+    resetTimer = window.setTimeout(() => {
+      logoClicks = 0
+    }, 1200)
+  })
+}
+
+const setMenuOpen = (open) => {
+  if (!menuToggle || !menuPanel) return
+  menuPanel.classList.toggle('hidden', !open)
+  menuToggle.setAttribute('aria-expanded', String(open))
+  menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
+}
+
+if (menuToggle && menuPanel) {
+  menuToggle.addEventListener('click', (event) => {
+    event.stopPropagation()
+    const shouldOpen = menuPanel.classList.contains('hidden')
+    setMenuOpen(shouldOpen)
+  })
+
+  menuPanel.addEventListener('click', (event) => {
+    if (event.target.closest('a')) {
+      setMenuOpen(false)
+    }
+  })
+
+  document.addEventListener('click', (event) => {
+    if (menuPanel.classList.contains('hidden')) return
+    if (menuPanel.contains(event.target) || menuToggle.contains(event.target)) return
+    setMenuOpen(false)
+  })
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenuOpen(false)
+  })
+}
+
+const THEME_KEY = 'pipadb-theme'
+const THEMES = ['dark', 'light', 'cappuccino', 'strawberry', 'mint', 'ocean', 'tokyo-night']
+
+const applyTheme = (theme) => {
+  if (!THEMES.includes(theme)) return
+  document.documentElement.dataset.theme = theme
+  if (themeSelect && themeSelect.value !== theme) {
+    themeSelect.value = theme
+  }
+  localStorage.setItem(THEME_KEY, theme)
+}
+
+const initTheme = () => {
+  const saved = localStorage.getItem(THEME_KEY)
+  applyTheme(THEMES.includes(saved) ? saved : 'dark')
+}
+
+if (themeSelect) {
+  themeSelect.addEventListener('change', (event) => {
+    applyTheme(event.target.value)
+  })
+}
+initTheme()
+
+const getTimeMessage = (hour) => {
+  if (hour >= 2 && hour < 5) return 'Quiet hours — keep it cozy.'
+  if (hour >= 5 && hour < 12) return 'Good morning — fresh builds ahead.'
+  if (hour >= 12 && hour < 17) return 'Good afternoon — happy testing.'
+  if (hour >= 17 && hour < 21) return 'Good evening — enjoy the database.'
+  return 'Late session — remember to stretch.'
+}
+
+const updateClock = () => {
+  if (!clockText || !timeMessage) return
+  const now = new Date()
+  const timeLabel = new Intl.DateTimeFormat(undefined, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(now)
+  clockText.textContent = `Local time · ${timeLabel}`
+  timeMessage.textContent = getTimeMessage(now.getHours())
+}
+
+if (clockText && timeMessage) {
+  updateClock()
+  window.setInterval(updateClock, 60_000)
+}
 
 searchInput.addEventListener('input', (event) => {
   state.query = event.target.value.trim()

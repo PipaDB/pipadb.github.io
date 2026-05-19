@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#000000',
-        panel: '#0d0d0f',
-        panel2: '#18181b',
-        line: '#3a3a42',
-        ink: '#f4f4f5',
-        muted: '#8a8a92',
-        brand: '#8b4dff',
+        paper: 'rgb(var(--color-paper) / <alpha-value>)',
+        panel: 'rgb(var(--color-panel) / <alpha-value>)',
+        panel2: 'rgb(var(--color-panel2) / <alpha-value>)',
+        line: 'rgb(var(--color-line) / <alpha-value>)',
+        ink: 'rgb(var(--color-ink) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        brand: 'rgb(var(--color-brand) / <alpha-value>)',
         /* Severity ramp — green (flawless) to red (dead). */
         tier: {
           platinum: '#2fe08a',
@@ -29,9 +29,9 @@ export default {
         mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
-        hard: '5px 5px 0 0 #2c2c33',
-        'hard-sm': '3px 3px 0 0 #2c2c33',
-        'hard-lg': '8px 8px 0 0 #2c2c33',
+        hard: '5px 5px 0 0 rgb(var(--shadow-hard) / 1)',
+        'hard-sm': '3px 3px 0 0 rgb(var(--shadow-hard) / 1)',
+        'hard-lg': '8px 8px 0 0 rgb(var(--shadow-hard) / 1)',
       },
     },
   },

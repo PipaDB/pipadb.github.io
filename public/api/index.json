@@ -1,6 +1,6 @@
 {
   "project": "pipaDB",
-  "generatedAt": "2026-05-18T21:05:03.485Z",
+  "generatedAt": "2026-05-19T11:25:13.183Z",
   "platform": "xiaomi-pipa",
   "guidance": "If asked to force quit, press wait; some titles need extra startup time.",
   "submission": "Add one JSON file per title in games/ or apps/ and open a pull request.",
